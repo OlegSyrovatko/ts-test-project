@@ -1,8 +1,12 @@
-console.log("test!");
-function add(num1, num2) {
-    return num1 + num2;
+function add(num1, num2, showResult, resultPhrase) {
+    var result = num1 + num2;
+    if (showResult) {
+        console.log(resultPhrase + result);
+    }
+    return result;
 }
 var n1 = 5;
 var n2 = 5.5;
-var result = add(n1, n2);
-console.log(result);
+var resultPhrase = "Result is: ";
+var printResult = true;
+add(n1, n2, printResult, resultPhrase);
