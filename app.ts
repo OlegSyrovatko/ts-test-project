@@ -7,9 +7,10 @@ function add(num1: number, num2: number, showResult: boolean, resultPhrase: stri
     return result;
 }
  
-const n1 = 5;
+let n1: number;
+n1 = 5;
 const n2 = 5.5;
-const resultPhrase = "Result is: "
+let resultPhrase = "Result is: ";
 const printResult = true;
     
 add(n1, n2, printResult, resultPhrase);

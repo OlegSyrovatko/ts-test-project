@@ -5,7 +5,8 @@ function add(num1, num2, showResult, resultPhrase) {
     }
     return result;
 }
-var n1 = 5;
+var n1;
+n1 = 5;
 var n2 = 5.5;
 var resultPhrase = "Result is: ";
 var printResult = true;
