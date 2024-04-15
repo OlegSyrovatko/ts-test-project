@@ -1,11 +1,11 @@
-function combine(num1, num2, resultConversation) {
-    if (typeof num1 === "number" && typeof num2 === "number" || resultConversation === "asNumber") {
-        return +num1 + +num2;
-    }
-    else {
-        return num1.toString() + num2.toString();
-    }
+function add(n1, n2) {
+    return n1 + n2;
 }
-console.log(combine(30, 26, "asNumber"));
-console.log(combine("30", "26", "asNumber"));
-console.log(combine("Oleh", "Syrovatko", "asText"));
+function printResult(num) {
+    console.log('Result' + num);
+}
+printResult(add(5, 12));
+var combineValues;
+combineValues = add;
+// combineValues = printResult;
+console.log(combineValues(8, 8));

@@ -1,19 +1,15 @@
-type CombineType = number | string;
-
-function combine(
-    num1: CombineType,
-    num2: CombineType,
-    resultConversation: "asNumber" | "asText"
-    ) {
-        if (typeof num1 === "number" && typeof num2 === "number" || resultConversation === "asNumber") {
-            return +num1 + +num2;
-        } else { 
-            return num1.toString() + num2.toString();
-        }
-
-    }
+function add(n1: number, n2: number) {
+    return n1 + n2;
+}
  
+function printResult(num: number): void {
+    console.log('Result' + num);
+}
+ 
+printResult(add(5, 12));
 
-console.log(combine(30, 26, "asNumber"));
-console.log(combine("30", "26", "asNumber"));
-console.log(combine("Oleh", "Syrovatko", "asText"));
+let combineValues: (a: number, b: number) => number;
+combineValues = add;
+// combineValues = printResult;
+
+console.log(combineValues(8,8));
