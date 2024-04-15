@@ -1,7 +1,9 @@
+type CombineType = number | string;
+
 function combine(
-    num1: number | string,
-    num2: number | string,
-    resultConversation: "asNumber" || "asText"
+    num1: CombineType,
+    num2: CombineType,
+    resultConversation: "asNumber" | "asText"
     ) {
         if (typeof num1 === "number" && typeof num2 === "number" || resultConversation === "asNumber") {
             return +num1 + +num2;
