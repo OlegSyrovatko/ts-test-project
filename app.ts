@@ -1,16 +1,24 @@
-function add(num1: number, num2: number, showResult: boolean, resultPhrase: string) {
-
-    const result = num1 + num2;
-    if (showResult) { 
-        console.log(resultPhrase + result);
-    }
-    return result;
+const person: {
+    name: string;
+    age: number;
+    hobbies: string[]; // array
+    role: [number, string]; // tuple (fixed length)
+} = {
+    name: "Oleh",
+    age: 40,
+    hobbies: ['sports', 'books'],
+    role: [2, 'author']
 }
- 
-let n1: number;
-n1 = 5;
-const n2 = 5.5;
-let resultPhrase = "Result is: ";
-const printResult = true;
-    
-add(n1, n2, printResult, resultPhrase);
+
+console.log(person.name);
+console.log(person.role);
+
+// {
+//   id: string;
+//   price: number;
+//   tags: string[];
+//   details: {
+//     title: string;
+//     description: string;
+//   }
+// }

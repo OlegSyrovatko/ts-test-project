@@ -1,13 +1,17 @@
-function add(num1, num2, showResult, resultPhrase) {
-    var result = num1 + num2;
-    if (showResult) {
-        console.log(resultPhrase + result);
-    }
-    return result;
-}
-var n1;
-n1 = 5;
-var n2 = 5.5;
-var resultPhrase = "Result is: ";
-var printResult = true;
-add(n1, n2, printResult, resultPhrase);
+var person = {
+    name: "Oleh",
+    age: 40,
+    hobbies: ['sports', 'books'],
+    role: [2, 'author']
+};
+console.log(person.name);
+console.log(person.role);
+// {
+//   id: string;
+//   price: number;
+//   tags: string[];
+//   details: {
+//     title: string;
+//     description: string;
+//   }
+// }
