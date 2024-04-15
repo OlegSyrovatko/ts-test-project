@@ -21,8 +21,11 @@ var person
     // role: [2, 'author']
     role: Role.ADMIN
 };
+var favoriteActivities;
+favoriteActivities = ["Sport", 5, true];
 console.log(person.name);
 console.log(person.role);
+console.log(favoriteActivities[2]);
 // {
 //   id: string;
 //   price: number;

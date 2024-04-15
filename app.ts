@@ -19,9 +19,14 @@ const person
 }
 
 
+
+let favoriteActivities: any[];
+favoriteActivities = ["Sport", 5, true];
+
+
 console.log(person.name);
 console.log(person.role);
-
+console.log(favoriteActivities[2]);
 // {
 //   id: string;
 //   price: number;
