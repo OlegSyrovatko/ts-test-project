@@ -1,15 +1,10 @@
-let userInput: unknown;
-let userName: string;
-
-
-userInput = 5;
-userInput = "Oleh";
-if (typeof userInput === "string") {
-    userName = userInput;
+class Department {
+    name: string;
+    constructor(n: string) {
+        this.name = n;
+     }
 }
+ 
+const accaunting = new Department('Accaunting');
 
-function generateError(message: string, code: number): never { 
-    throw { message: message, code: code };
-}
-
-generateError("Some Error", 404);
+console.log(accaunting);

@@ -1,13 +1,9 @@
 "use strict";
-let userInput;
-let userName;
-userInput = 5;
-userInput = "Oleh";
-if (typeof userInput === "string") {
-    userName = userInput;
+class Department {
+    constructor(n) {
+        this.name = n;
+    }
 }
-function generateError(message, code) {
-    throw { message: message, code: code };
-}
-generateError("Some Error", 404);
+const accaunting = new Department('Accaunting');
+console.log(accaunting);
 //# sourceMappingURL=app.js.map
