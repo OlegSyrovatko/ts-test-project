@@ -29,6 +29,12 @@ class AccountDepartment extends Department {
         this.reports = reports;
         this.reports = reports;
     }
+    addEmployee(emploee) {
+        if (emploee === "Max") {
+            return;
+        }
+        this.emploees.push(emploee);
+    }
     addReport(report) {
         this.reports.push(report);
     }
@@ -45,4 +51,7 @@ console.log(ItDep);
 const AcDep = new AccountDepartment("d2", []);
 AcDep.addReport("first report");
 AcDep.printReports();
+AcDep.addEmployee("Max");
+AcDep.addEmployee("Nick");
+AcDep.showEmployees();
 //# sourceMappingURL=app.js.map
