@@ -24,10 +24,23 @@ class ItDepartment extends Department {
     }
 }
 class AccountDepartment extends Department {
+    get mostRecentReport() {
+        if (this.lastReport) {
+            return this.lastReport;
+        }
+        throw new Error("No lastReport found");
+    }
+    set mostRecentReport(value) {
+        if (!value) {
+            throw new Error("Please pass a valid value");
+        }
+        this.addReport(value);
+    }
     constructor(id, reports) {
         super(id, "Account");
         this.reports = reports;
         this.reports = reports;
+        this.lastReport = reports[0];
     }
     addEmployee(emploee) {
         if (emploee === "Max") {
@@ -37,6 +50,7 @@ class AccountDepartment extends Department {
     }
     addReport(report) {
         this.reports.push(report);
+        this.lastReport = report;
     }
     printReports() {
         console.log(this.reports);
@@ -49,7 +63,9 @@ ItDep.addEmployee("Max");
 ItDep.showEmployees();
 console.log(ItDep);
 const AcDep = new AccountDepartment("d2", []);
-AcDep.addReport("first report");
+AcDep.mostRecentReport = "test setter Report";
+AcDep.addReport("custom report");
+console.log(AcDep.mostRecentReport);
 AcDep.printReports();
 AcDep.addEmployee("Max");
 AcDep.addEmployee("Nick");
