@@ -1,4 +1,4 @@
-class Department {
+abstract class Department {
   // private readonly id: string;
   // private name: string;
 
@@ -8,15 +8,14 @@ class Department {
   static createEmployee(name: string) {
     return { name };
   }
-  constructor(private readonly id: string, private name: string) {
+  constructor(protected readonly id: string, public name: string) {
     // this.id = id;
     // this.name = name;
     //  console.log(Department.fiscalYear); // for static properties
   }
 
-  describes(this: Department) {
-    console.log("describes: " + this.id + " " + this.name);
-  }
+  abstract describe(this: Department): void;
+
   addEmployee(emploee: string) {
     this.emploees.push(emploee);
   }
@@ -32,6 +31,10 @@ class ItDepartment extends Department {
   constructor(id: string, admins: string[]) {
     super(id, "IT");
     this.admins = admins;
+  }
+
+  describe() {
+    console.log("It department: " + this.id);
   }
 }
 
@@ -58,6 +61,10 @@ class AccountDepartment extends Department {
     this.lastReport = reports[0];
   }
 
+  describe() {
+    console.log("Account department: " + this.id);
+  }
+
   addEmployee(emploee: string) {
     if (emploee === "Max") {
       return;
@@ -74,24 +81,18 @@ class AccountDepartment extends Department {
   }
 }
 
-console.log(Department.createEmployee("test new Employee"));
-console.log(Department.fiscalYear);
+console.log(Department.createEmployee("test new Employee")); // static method
+console.log("static property: " + Department.fiscalYear);
 
 const ItDep = new ItDepartment("d1", ["John"]);
-
-ItDep.describes();
-
-// const accauntingCopy = {name: "AccauntingCopy", describes: accaunting.describes };
-// accauntingCopy.describes();
-
+ItDep.describe();
 ItDep.addEmployee("John");
 ItDep.addEmployee("Max");
-// accaunting.emploees[2] = "Anna";
 ItDep.showEmployees();
 console.log(ItDep);
 
 const AcDep = new AccountDepartment("d2", []);
-
+AcDep.describe();
 AcDep.mostRecentReport = "test setter Report"; // setter
 AcDep.addReport("custom report");
 
@@ -101,3 +102,8 @@ AcDep.printReports();
 AcDep.addEmployee("Max");
 AcDep.addEmployee("Nick");
 AcDep.showEmployees();
+
+// const accauntingCopy = {name: "AccauntingCopy", describes: accaunting.describes };
+// accauntingCopy.describes();
+
+// accaunting.emploees[2] = "Anna";

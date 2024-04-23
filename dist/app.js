@@ -8,9 +8,6 @@ class Department {
         this.name = name;
         this.emploees = [];
     }
-    describes() {
-        console.log("describes: " + this.id + " " + this.name);
-    }
     addEmployee(emploee) {
         this.emploees.push(emploee);
     }
@@ -25,6 +22,9 @@ class ItDepartment extends Department {
         super(id, "IT");
         this.admins = [];
         this.admins = admins;
+    }
+    describe() {
+        console.log("It department: " + this.id);
     }
 }
 class AccountDepartment extends Department {
@@ -46,6 +46,9 @@ class AccountDepartment extends Department {
         this.reports = reports;
         this.lastReport = reports[0];
     }
+    describe() {
+        console.log("Account department: " + this.id);
+    }
     addEmployee(emploee) {
         if (emploee === "Max") {
             return;
@@ -61,14 +64,15 @@ class AccountDepartment extends Department {
     }
 }
 console.log(Department.createEmployee("test new Employee"));
-console.log(Department.fiscalYear);
+console.log("static property: " + Department.fiscalYear);
 const ItDep = new ItDepartment("d1", ["John"]);
-ItDep.describes();
+ItDep.describe();
 ItDep.addEmployee("John");
 ItDep.addEmployee("Max");
 ItDep.showEmployees();
 console.log(ItDep);
 const AcDep = new AccountDepartment("d2", []);
+AcDep.describe();
 AcDep.mostRecentReport = "test setter Report";
 AcDep.addReport("custom report");
 console.log(AcDep.mostRecentReport);
