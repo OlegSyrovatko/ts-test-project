@@ -46,6 +46,13 @@ class AccountDepartment extends Department {
         this.reports = reports;
         this.lastReport = reports[0];
     }
+    static getInstance() {
+        if (AccountDepartment.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountDepartment("d2", []);
+        return this.instance;
+    }
     describe() {
         console.log("Account department: " + this.id);
     }
@@ -71,7 +78,8 @@ ItDep.addEmployee("John");
 ItDep.addEmployee("Max");
 ItDep.showEmployees();
 console.log(ItDep);
-const AcDep = new AccountDepartment("d2", []);
+const AcDep = AccountDepartment.getInstance();
+console.log(AcDep);
 AcDep.describe();
 AcDep.mostRecentReport = "test setter Report";
 AcDep.addReport("custom report");

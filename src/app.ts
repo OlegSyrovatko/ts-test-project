@@ -40,7 +40,7 @@ class ItDepartment extends Department {
 
 class AccountDepartment extends Department {
   private lastReport: string;
-
+  private static instance: AccountDepartment;
   get mostRecentReport() {
     if (this.lastReport) {
       return this.lastReport;
@@ -55,10 +55,20 @@ class AccountDepartment extends Department {
     this.addReport(value);
   }
 
-  constructor(id: string, private reports: string[]) {
+  private constructor(id: string, private reports: string[]) {
+    // Singletons & Private Constructors
     super(id, "Account");
     this.reports = reports;
     this.lastReport = reports[0];
+  }
+
+  static getInstance() {
+    // Singletons & Private Constructors
+    if (AccountDepartment.instance) {
+      return this.instance;
+    }
+    this.instance = new AccountDepartment("d2", []);
+    return this.instance;
   }
 
   describe() {
@@ -91,7 +101,10 @@ ItDep.addEmployee("Max");
 ItDep.showEmployees();
 console.log(ItDep);
 
-const AcDep = new AccountDepartment("d2", []);
+// const AcDep = new AccountDepartment("d2", []);
+const AcDep = AccountDepartment.getInstance();
+console.log(AcDep); // Singletons & Private Constructors
+
 AcDep.describe();
 AcDep.mostRecentReport = "test setter Report"; // setter
 AcDep.addReport("custom report");
