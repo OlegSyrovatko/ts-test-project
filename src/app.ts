@@ -23,12 +23,18 @@ usr1 = {
 
 usr1.greet("Hi, I am");
 
-interface Greetable {
-  name: string;
+interface Named {
+  readonly name: string;
+}
+
+interface Greetable extends Named {
+  // interface Greetable extends Named, Named2, Named3 {
+  // interface Greetable {
   greet(phrase: string): void;
 }
 
 class Person implements Greetable {
+  // class Person implements Greetable, Named {
   name: string;
   age = 30;
   constructor(n: string) {
