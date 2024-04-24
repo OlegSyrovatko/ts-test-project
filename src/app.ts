@@ -46,7 +46,17 @@ class Person implements Greetable {
   }
 }
 
+// type AddFn = (a: number, b: number) => number;
+interface AddFn {
+  (a: number, b: number): number;
+}
+let plus: AddFn;
+plus = (n1: number, n2: number) => {
+  return n1 + n2;
+};
+
 let usr2: Greetable;
 usr2 = new Person("John");
 usr2.greet("Hi, I am");
 console.log(usr2);
+console.log(plus(2, 2));

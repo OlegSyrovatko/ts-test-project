@@ -17,8 +17,13 @@ class Person {
         console.log(phrase + " " + this.name);
     }
 }
+let plus;
+plus = (n1, n2) => {
+    return n1 + n2;
+};
 let usr2;
 usr2 = new Person("John");
 usr2.greet("Hi, I am");
 console.log(usr2);
+console.log(plus(2, 2));
 //# sourceMappingURL=app.js.map
