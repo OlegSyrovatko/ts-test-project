@@ -59,4 +59,8 @@ function moveAnimal(animal) {
 }
 moveAnimal({ type: "bird", flyingSpeed: 10 });
 moveAnimal({ type: "horse", runningSpeed: 7 });
+const inputEl = document.getElementById("some-id");
+if (inputEl) {
+    inputEl.value = "...";
+}
 //# sourceMappingURL=app.js.map
