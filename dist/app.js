@@ -45,4 +45,18 @@ printEmployeeInfo(e1);
 printEmployeeInfo({ name: "Oleh", startDate: new Date() });
 useVehicle(v1);
 useVehicle(v2);
+function moveAnimal(animal) {
+    let speed;
+    switch (animal.type) {
+        case "bird":
+            speed = animal.flyingSpeed;
+            console.log(animal.type + " speed: " + speed);
+            break;
+        case "horse":
+            speed = animal.runningSpeed;
+            console.log(animal.type + " speed: " + speed);
+    }
+}
+moveAnimal({ type: "bird", flyingSpeed: 10 });
+moveAnimal({ type: "horse", runningSpeed: 7 });
 //# sourceMappingURL=app.js.map

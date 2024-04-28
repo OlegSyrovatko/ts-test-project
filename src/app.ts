@@ -72,3 +72,30 @@ printEmployeeInfo({ name: "Oleh", startDate: new Date() });
 
 useVehicle(v1);
 useVehicle(v2);
+
+interface Bird {
+  flyingSpeed: number;
+  type: "bird";
+}
+interface Horse {
+  runningSpeed: number;
+  type: "horse";
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case "bird":
+      speed = animal.flyingSpeed;
+      console.log(animal.type + " speed: " + speed);
+      break;
+    case "horse":
+      speed = animal.runningSpeed;
+      console.log(animal.type + " speed: " + speed);
+  }
+}
+
+moveAnimal({ type: "bird", flyingSpeed: 10 });
+moveAnimal({ type: "horse", runningSpeed: 7 });
