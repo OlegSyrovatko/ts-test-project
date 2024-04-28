@@ -1,36 +1,24 @@
 "use strict";
-let usr1;
-usr1 = {
-    nameP: "Oleh",
-    age: 40,
-    greet(phrase) {
-        console.log(phrase + " " + this.nameP);
-    },
+const e1 = {
+    name: "Max",
+    privileges: ["create server"],
+    startDate: new Date(),
 };
-usr1.greet("Hi, I am");
-class Person {
-    constructor(n) {
-        this.age = 30;
-        if (n) {
-            this.name = n;
-        }
+function add2(n1, n2) {
+    if (typeof n1 === "string" || typeof n2 === "string") {
+        return n1.toString() + n2.toString();
     }
-    greet(phrase) {
-        if (this.name) {
-            console.log(phrase + " " + this.name);
-        }
-        console.log("Hi");
+    return n1 + n2;
+}
+console.log(add2(4, 5));
+function printEmployeeInfo(emp) {
+    console.log("name" + emp.name);
+    if ("privileges" in emp) {
+        console.log("privileges: " + emp.privileges);
+    }
+    if ("startDate" in emp) {
+        console.log("startDate: " + emp.startDate);
     }
 }
-let plus;
-plus = (n1, n2) => {
-    return n1 + n2;
-};
-let usr2;
-usr2 = new Person();
-let usr3;
-usr3 = new Person("Mike");
-usr3.greet("Hi, I am");
-console.log(usr3);
-console.log(plus(2, 2));
+printEmployeeInfo(e1);
 //# sourceMappingURL=app.js.map
