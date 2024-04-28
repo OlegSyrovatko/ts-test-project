@@ -28,12 +28,10 @@ function add2(n1: Combinable, n2: Combinable) {
   return n1 + n2;
 }
 
-console.log(add2(4, 5));
-
 type UnknownType = Admin | Employee;
 
 function printEmployeeInfo(emp: UnknownType) {
-  console.log("name" + emp.name);
+  console.log("name: " + emp.name);
   if ("privileges" in emp) {
     console.log("privileges: " + emp.privileges);
   }
@@ -42,4 +40,35 @@ function printEmployeeInfo(emp: UnknownType) {
   }
 }
 
+class Car {
+  drive() {
+    console.log("dryving...");
+  }
+}
+class Truck {
+  drive() {
+    console.log("dryving a truck...");
+  }
+  loadCargo(amount: number) {
+    console.log("with weight: " + amount);
+  }
+}
+
+type Vehicle = Car | Truck;
+const v1 = new Car();
+const v2 = new Truck();
+
+function useVehicle(vehicle: Vehicle) {
+  vehicle.drive();
+  if (vehicle instanceof Truck) {
+    // if ("loadCargo" in vehicle) {
+    vehicle.loadCargo(1000);
+  }
+}
+
+console.log(add2(4, 5));
 printEmployeeInfo(e1);
+printEmployeeInfo({ name: "Oleh", startDate: new Date() });
+
+useVehicle(v1);
+useVehicle(v2);
