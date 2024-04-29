@@ -23,4 +23,29 @@ function keyInObject(obj, key) {
     return "value " + obj[key];
 }
 console.log(keyInObject({ name: "Oleh" }, "name"));
+class DataStorage {
+    constructor() {
+        this.data = [];
+    }
+    addItem(item) {
+        this.data.push(item);
+    }
+    removeItem(item) {
+        if (this.data.indexOf(item) === -1) {
+            return;
+        }
+        this.data.splice(this.data.indexOf(item), 1);
+    }
+    getItems() {
+        return [...this.data];
+    }
+}
+const dataStorage = new DataStorage();
+dataStorage.addItem("Oleh");
+dataStorage.addItem("John");
+dataStorage.addItem("Max");
+console.log(dataStorage.getItems());
+dataStorage.removeItem("Max");
+console.log(dataStorage.getItems());
+const numStorage = new DataStorage();
 //# sourceMappingURL=app.js.map

@@ -42,3 +42,41 @@ function keyInObject<T extends object, U extends keyof T>(obj: T, key: U) {
 }
 
 console.log(keyInObject({ name: "Oleh" }, "name"));
+
+class DataStorage<T extends string | number | boolean> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return;
+    }
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const dataStorage = new DataStorage<string>();
+dataStorage.addItem("Oleh");
+dataStorage.addItem("John");
+dataStorage.addItem("Max");
+console.log(dataStorage.getItems());
+dataStorage.removeItem("Max");
+console.log(dataStorage.getItems());
+
+const numStorage = new DataStorage<number>();
+/*
+const objStorage = new DataStorage<object>();
+objStorage.addItem({ name: "Oleh" });
+objStorage.addItem({ name: "John" });
+objStorage.addItem({ name: "Max" });
+console.log(objStorage.getItems());
+objStorage.removeItem({ name: "Max" });
+console.log(objStorage.getItems());
+*/
