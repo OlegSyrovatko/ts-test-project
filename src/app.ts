@@ -131,3 +131,7 @@ const fetchedUserData = {
 };
 
 console.log(fetchedUserData?.job?.title);
+
+const UserInput = undefined;
+const storedData = UserInput ?? "default";
+console.log(storedData);
