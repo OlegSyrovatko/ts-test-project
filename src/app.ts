@@ -21,12 +21,20 @@ type Combinable = string | number;
 type Numeric = number | boolean;
 type Universal = Combinable & Numeric;
 
+function add2(n1: number, n2: number): number;
+function add2(n1: string, n2: string): string;
+function add2(n1: number, n2: string): string;
+function add2(n1: string, n2: number): string;
 function add2(n1: Combinable, n2: Combinable) {
   if (typeof n1 === "string" || typeof n2 === "string") {
     return n1.toString() + n2.toString();
   }
   return n1 + n2;
 }
+
+console.log(add2(4, 5));
+const res = add2("Oleh", "Syrovatko");
+console.log(res.split(" "));
 
 type UnknownType = Admin | Employee;
 
@@ -66,7 +74,6 @@ function useVehicle(vehicle: Vehicle) {
   }
 }
 
-console.log(add2(4, 5));
 printEmployeeInfo(e1);
 printEmployeeInfo({ name: "Oleh", startDate: new Date() });
 
@@ -108,3 +115,11 @@ const inputEl = document.getElementById("some-id");
 if (inputEl) {
   (inputEl as HTMLInputElement).value = "...";
 }
+
+interface ErrorContainer {
+  [prop: string]: string;
+}
+const ErrorBag: ErrorContainer = {
+  email: "not valid email",
+  username: "must  start with a capital character",
+};

@@ -10,6 +10,9 @@ function add2(n1, n2) {
     }
     return n1 + n2;
 }
+console.log(add2(4, 5));
+const res = add2("Oleh", "Syrovatko");
+console.log(res.split(" "));
 function printEmployeeInfo(emp) {
     console.log("name: " + emp.name);
     if ("privileges" in emp) {
@@ -40,7 +43,6 @@ function useVehicle(vehicle) {
         vehicle.loadCargo(1000);
     }
 }
-console.log(add2(4, 5));
 printEmployeeInfo(e1);
 printEmployeeInfo({ name: "Oleh", startDate: new Date() });
 useVehicle(v1);
@@ -63,4 +65,8 @@ const inputEl = document.getElementById("some-id");
 if (inputEl) {
     inputEl.value = "...";
 }
+const ErrorBag = {
+    email: "not valid email",
+    username: "must  start with a capital character",
+};
 //# sourceMappingURL=app.js.map
