@@ -48,4 +48,12 @@ console.log(dataStorage.getItems());
 dataStorage.removeItem("Max");
 console.log(dataStorage.getItems());
 const numStorage = new DataStorage();
+const objStorage = new DataStorage();
+objStorage.addItem({ name: "Oleh" });
+objStorage.addItem({ name: "John" });
+const maxObj = { name: "Max" };
+objStorage.addItem(maxObj);
+console.log(objStorage.getItems());
+objStorage.removeItem(maxObj);
+console.log(objStorage.getItems());
 //# sourceMappingURL=app.js.map
