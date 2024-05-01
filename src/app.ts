@@ -1,9 +1,18 @@
-function Logger(constructor: Function) {
-  console.log("logging");
-  console.log(constructor);
+// function Logger(constructor: Function) {
+//   console.log("logging");
+//   console.log(constructor);
+// }
+
+// @Logger
+
+function Logger(param: string) {
+  return function (constructor: Function) {
+    console.log(param);
+    console.log(constructor);
+  };
 }
 
-@Logger
+@Logger("logging-argument")
 class Person2 {
   name = "Max";
 
