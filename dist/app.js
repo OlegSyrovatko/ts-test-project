@@ -56,4 +56,12 @@ objStorage.addItem(maxObj);
 console.log(objStorage.getItems());
 objStorage.removeItem(maxObj);
 console.log(objStorage.getItems());
+function createCourseGoal(title, desciption, date) {
+    let courseGoal = {};
+    courseGoal.title = title;
+    courseGoal.description = desciption;
+    courseGoal.completeUntil = date;
+    return courseGoal;
+}
+const names = ["Oleh", "John"];
 //# sourceMappingURL=app.js.map

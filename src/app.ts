@@ -80,3 +80,24 @@ objStorage.addItem(maxObj);
 console.log(objStorage.getItems());
 objStorage.removeItem(maxObj);
 console.log(objStorage.getItems());
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  desciption: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = desciption;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal;
+}
+
+const names: Readonly<string[]> = ["Oleh", "John"];
+// names.push("Max");
