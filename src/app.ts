@@ -4,15 +4,15 @@ function Logger0(constructor: Function) {
 }
 
 function Logger(param: string) {
-  console.log("logger");
   return function (_: Function) {
+    console.log("logger");
     console.log(param);
   };
 }
 
 function WithTemplate(template: string, hookId: string) {
-  console.log("add h1");
   return function (constructor: any) {
+    console.log("add h1");
     const hookEl = document.getElementById(hookId);
     const p = new constructor();
     if (hookEl) {
@@ -37,18 +37,38 @@ console.log(pers);
 
 function Log(target: any, propertyName: string | Symbol) {
   console.log("Property decorator");
-  console.log(target, propertyName);
+  console.log(target);
+  console.log("Property name: " + propertyName);
+}
+function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
+  console.log("Accessor decorator");
+  console.log(target);
+  console.log("name: " + name);
+  console.log(descriptor);
+}
+function Log3(
+  target: any,
+  name: string | Symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log("Method decorator");
+  console.log(target);
+  console.log("name: " + name);
+  console.log(descriptor);
+}
+function Log4(target: any, name: string | Symbol, position: number) {
+  console.log("Parameter decorator");
+  console.log(target);
+  console.log("name: " + name);
+  console.log(position);
 }
 
 class Product {
   @Log
   title: string;
   private _price: number;
-  constructor(t: string, p: number) {
-    this.title = t;
-    this._price = p;
-  }
 
+  @Log2
   set price(val: number) {
     if (val > 0) {
       this._price = val;
@@ -56,8 +76,12 @@ class Product {
       throw new Error("Price should be great than zero");
     }
   }
-
-  getPriceWithTax(tax: number) {
+  constructor(t: string, p: number) {
+    this.title = t;
+    this._price = p;
+  }
+  @Log3
+  getPriceWithTax(@Log4 tax: number) {
     return this._price * (1 + tax);
   }
 }
