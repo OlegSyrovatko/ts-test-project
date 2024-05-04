@@ -19,14 +19,19 @@ function Logger(param) {
     };
 }
 function WithTemplate(template, hookId) {
-    return function (constructor) {
-        console.log("add h1");
-        const hookEl = document.getElementById(hookId);
-        const p = new constructor();
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector("h1").textContent = p.name;
-        }
+    console.log("template factory");
+    return function (originalConstractor) {
+        return class extends originalConstractor {
+            constructor(..._) {
+                super();
+                console.log("add h1");
+                const hookEl = document.getElementById(hookId);
+                if (hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector("h1").textContent = this.name;
+                }
+            }
+        };
     };
 }
 let Person2 = class Person2 {

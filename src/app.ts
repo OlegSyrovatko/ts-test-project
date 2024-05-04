@@ -9,7 +9,7 @@ function Logger(param: string) {
     console.log(param);
   };
 }
-
+/*
 function WithTemplate(template: string, hookId: string) {
   return function (constructor: any) {
     console.log("add h1");
@@ -21,6 +21,26 @@ function WithTemplate(template: string, hookId: string) {
     }
   };
 }
+*/
+function WithTemplate(template: string, hookId: string) {
+  console.log("template factory");
+  return function <T extends { new (...args: any[]): { name: string } }>(
+    originalConstractor: T
+  ) {
+    return class extends originalConstractor {
+      constructor(..._: any[]) {
+        super();
+        console.log("add h1");
+        const hookEl = document.getElementById(hookId);
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl.querySelector("h1")!.textContent = this.name;
+        }
+      }
+    };
+  };
+}
+
 @WithTemplate("<h1>default name</h1>", "app")
 @Logger0
 @Logger("logging-argument")
