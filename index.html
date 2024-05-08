@@ -7,6 +7,37 @@
     <script src="./dist/app.js" defer></script>
   </head>
   <body>
+    <template id="project-input">
+      <form>
+        <div class="form-control">
+          <label for="title"
+            >Title
+            <input type="text" id="title" />
+          </label>
+        </div>
+        <div class="form-control">
+          <label for="description"
+            >Description
+            <textarea type="text" rows="3" id="description"></textarea>
+          </label>
+        </div>
+        <div class="form-control">
+          <label for="people"
+            >People
+            <input type="number" step="1" min="0" max="10" id="people" />
+          </label>
+        </div>
+        <button type="submit">Add Project</button>
+      </form>
+    </template>
+    <template id="project-list">
+      <section>
+        <header><h2>ss</h2></header>
+        <ul></ul>
+      </section>
+    </template>
+    <div id="app"></div>
+    <!--
     <input type="text" id="some-id" />
     <div id="app"></div>
     <button>Click me</button>
@@ -16,5 +47,6 @@
       <input type="text" placeholder="price value" value="" id="price0" />
       <input type="submit" value="Save" />
     </form>
+    -->
   </body>
 </html>
