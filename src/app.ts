@@ -1,3 +1,42 @@
+// validation
+interface Validatable {
+  value: string | number;
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  min?: number;
+  max?: number;
+}
+
+function validates(validateInput: Validatable) {
+  let isValid = true;
+  if (validateInput.required) {
+    isValid = isValid && validateInput.value.toString().trim().length !== 0;
+  }
+  if (
+    validateInput.minLength != null &&
+    typeof validateInput.value === "string"
+  ) {
+    isValid =
+      isValid && validateInput.value.trim().length >= validateInput.minLength;
+  }
+  if (
+    validateInput.maxLength != null &&
+    typeof validateInput.value === "string"
+  ) {
+    isValid =
+      isValid && validateInput.value.trim().length <= validateInput.maxLength;
+  }
+  if (validateInput.min != null && typeof validateInput.value === "number") {
+    isValid = isValid && validateInput.value >= validateInput.min;
+  }
+  if (validateInput.max != null && typeof validateInput.value === "number") {
+    isValid = isValid && validateInput.value <= validateInput.max;
+  }
+  return isValid;
+}
+
+// decorator
 function autobind(_: any, _2: string | Symbol, descriptor: PropertyDescriptor) {
   const originalMethod = descriptor.value;
   const adjDescriptor: PropertyDescriptor = {
@@ -47,17 +86,37 @@ class ProjectInput {
 
   private gatherUserInput(): [string, string, number] | void {
     const enteredTitle = this.titleInputElement.value;
-    const entereddDescription = this.descriptionInputElement.value;
+    const enteredDescription = this.descriptionInputElement.value;
     const enteredPeople = this.peopleInputElement.value;
+
+    const titleValidatable: Validatable = {
+      value: enteredTitle,
+      required: true,
+    };
+    const descriptionValidatable: Validatable = {
+      value: enteredDescription,
+      required: true,
+      minLength: 5,
+    };
+    const peopleValidatable: Validatable = {
+      value: +enteredPeople,
+      required: true,
+      min: 1,
+      max: 5,
+    };
+
     if (
-      enteredTitle.trim().length === 0 ||
-      entereddDescription.trim().length === 0 ||
-      enteredPeople.trim().length === 0
+      // enteredTitle.trim().length === 0 ||
+      // entereddDescription.trim().length === 0 ||
+      // enteredPeople.trim().length === 0
+      !validates(titleValidatable) ||
+      !validates(descriptionValidatable) ||
+      !validates(peopleValidatable)
     ) {
       alert("Enter valid value, try again");
       return;
     } else {
-      return [enteredTitle, entereddDescription, +enteredPeople];
+      return [enteredTitle, enteredDescription, +enteredPeople];
     }
   }
 
