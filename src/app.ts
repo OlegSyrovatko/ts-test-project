@@ -5,7 +5,7 @@ interface Draggable {
 
 interface DragTarget {
   dragOverHandler(event: DragEvent): void;
-  dragHandler(event: DragEvent): void;
+  dropHandler(event: DragEvent): void;
   dragLeaveHandler(event: DragEvent): void;
 }
 
@@ -53,7 +53,7 @@ class ProjectState extends State<Project> {
 
   addProject(title: string, desription: string, numOfPeople: number) {
     const newProject = new Project(
-      Math.random.toString(),
+      Math.random().toString(),
       title,
       desription,
       numOfPeople,
@@ -180,11 +180,12 @@ class ProjectItem
 
   @autobind
   dragStartHandler(event: DragEvent) {
-    console.log(event);
+    event.dataTransfer!.setData("text/plain", this.project.id);
+    event.dataTransfer!.effectAllowed = "move";
   }
   @autobind
-  dragEndHandler(event: DragEvent) {
-    console.log(event + "drag End");
+  dragEndHandler(_: DragEvent) {
+    console.log("drag End");
   }
 
   configure() {
@@ -217,11 +218,18 @@ class ProjectList
   }
 
   @autobind
-  dragOverHandler(_: DragEvent) {
-    const listEl = this.element.querySelector("ul")!;
-    listEl.classList.add("droppable");
+  dragOverHandler(event: DragEvent) {
+    event.preventDefault();
+    if (event.dataTransfer && event.dataTransfer.types[0] === "text/plain") {
+      const listEl = this.element.querySelector("ul")!;
+      listEl.classList.add("droppable");
+    }
   }
-  dragHandler(_: DragEvent) {}
+
+  dropHandler(event: DragEvent) {
+    const prId = event.dataTransfer!.getData("text/plain");
+    console.log(prId);
+  }
   @autobind
   dragLeaveHandler(_: DragEvent) {
     const listEl = this.element.querySelector("ul")!;
@@ -230,8 +238,8 @@ class ProjectList
 
   configure() {
     this.element.addEventListener("dragover", this.dragOverHandler);
-    this.element.addEventListener("drop", this.dragHandler);
     this.element.addEventListener("dragleave", this.dragLeaveHandler);
+    this.element.addEventListener("drop", this.dropHandler);
 
     projState.addListener((projects: Project[]) => {
       const relevantProjects = projects.filter((proj) => {
@@ -342,7 +350,6 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     if (Array.isArray(userInput)) {
       const [tit, des, pep] = userInput;
       projState.addProject(tit, des, pep);
-      console.log(tit, des, pep);
       this.clearsInput();
     }
   }

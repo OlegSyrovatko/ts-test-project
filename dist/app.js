@@ -40,7 +40,7 @@ class ProjectState extends State {
         return this.instance;
     }
     addProject(title, desription, numOfPeople) {
-        const newProject = new Project(Math.random.toString(), title, desription, numOfPeople, ProjectStatus.Active);
+        const newProject = new Project(Math.random().toString(), title, desription, numOfPeople, ProjectStatus.Active);
         this.projects.push(newProject);
         for (const listenerFn of this.listeners) {
             listenerFn(this.projects.slice());
@@ -111,10 +111,11 @@ class ProjectItem extends Component {
         return `${this.project.people} persons `;
     }
     dragStartHandler(event) {
-        console.log(event);
+        event.dataTransfer.setData("text/plain", this.project.id);
+        event.dataTransfer.effectAllowed = "move";
     }
-    dragEndHandler(event) {
-        console.log(event + "drag End");
+    dragEndHandler(_) {
+        console.log("drag End");
     }
     configure() {
         this.element.addEventListener("dragstart", this.dragStartHandler);
@@ -141,19 +142,25 @@ class ProjectList extends Component {
         this.configure();
         this.renderContent();
     }
-    dragOverHandler(_) {
-        const listEl = this.element.querySelector("ul");
-        listEl.classList.add("droppable");
+    dragOverHandler(event) {
+        event.preventDefault();
+        if (event.dataTransfer && event.dataTransfer.types[0] === "text/plain") {
+            const listEl = this.element.querySelector("ul");
+            listEl.classList.add("droppable");
+        }
     }
-    dragHandler(_) { }
+    dropHandler(event) {
+        const prId = event.dataTransfer.getData("text/plain");
+        console.log(prId);
+    }
     dragLeaveHandler(_) {
         const listEl = this.element.querySelector("ul");
         listEl.classList.remove("droppable");
     }
     configure() {
         this.element.addEventListener("dragover", this.dragOverHandler);
-        this.element.addEventListener("drop", this.dragHandler);
         this.element.addEventListener("dragleave", this.dragLeaveHandler);
+        this.element.addEventListener("drop", this.dropHandler);
         projState.addListener((projects) => {
             const relevantProjects = projects.filter((proj) => {
                 if (this.type === "active") {
@@ -237,7 +244,6 @@ class ProjectInput extends Component {
         if (Array.isArray(userInput)) {
             const [tit, des, pep] = userInput;
             projState.addProject(tit, des, pep);
-            console.log(tit, des, pep);
             this.clearsInput();
         }
     }
