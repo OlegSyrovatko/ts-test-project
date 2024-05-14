@@ -63,7 +63,11 @@ var App;
             }
         }
     }
-    const projState = ProjectState.getInstace();
+    App.ProjectState = ProjectState;
+    App.projState = ProjectState.getInstace();
+})(App || (App = {}));
+var App;
+(function (App) {
     function validates(validateInput) {
         let isValid = true;
         if (validateInput.required) {
@@ -87,6 +91,10 @@ var App;
         }
         return isValid;
     }
+    App.validates = validates;
+})(App || (App = {}));
+var App;
+(function (App) {
     function autobind(_, _2, descriptor) {
         const originalMethod = descriptor.value;
         const adjDescriptor = {
@@ -99,6 +107,10 @@ var App;
         };
         return adjDescriptor;
     }
+    App.autobind = autobind;
+})(App || (App = {}));
+var App;
+(function (App) {
     class Component {
         constructor(templateId, hostElementId, insertedAtStart, newElementId) {
             this.templateElement = document.getElementById(templateId);
@@ -113,7 +125,11 @@ var App;
             this.hostElement.insertAdjacentElement(insertAtBegining ? "afterbegin" : "beforeend", this.element);
         }
     }
-    class ProjectItem extends Component {
+    App.Component = Component;
+})(App || (App = {}));
+var App;
+(function (App) {
+    class ProjectItem extends App.Component {
         constructor(hostId, project) {
             super("single-project", hostId, false, project.id);
             this.project = project;
@@ -143,12 +159,16 @@ var App;
         }
     }
     __decorate([
-        autobind
+        App.autobind
     ], ProjectItem.prototype, "dragStartHandler", null);
     __decorate([
-        autobind
+        App.autobind
     ], ProjectItem.prototype, "dragEndHandler", null);
-    class ProjectList extends Component {
+    App.ProjectItem = ProjectItem;
+})(App || (App = {}));
+var App;
+(function (App) {
+    class ProjectList extends App.Component {
         constructor(type) {
             super("project-list", "app", false, `${type}-projects`);
             this.type = type;
@@ -166,7 +186,7 @@ var App;
         }
         dropHandler(event) {
             const prId = event.dataTransfer.getData("text/plain");
-            projState.moveProject(prId, this.type === "active" ? App.ProjectStatus.Active : App.ProjectStatus.Finished);
+            App.projState.moveProject(prId, this.type === "active" ? App.ProjectStatus.Active : App.ProjectStatus.Finished);
         }
         dragLeaveHandler(_) {
             const listEl = this.element.querySelector("ul");
@@ -176,7 +196,7 @@ var App;
             this.element.addEventListener("dragover", this.dragOverHandler);
             this.element.addEventListener("dragleave", this.dragLeaveHandler);
             this.element.addEventListener("drop", this.dropHandler);
-            projState.addListener((projects) => {
+            App.projState.addListener((projects) => {
                 const relevantProjects = projects.filter((proj) => {
                     if (this.type === "active") {
                         return proj.status === App.ProjectStatus.Active;
@@ -197,20 +217,24 @@ var App;
             const listEl = document.getElementById(`${this.type}-projects-list`);
             listEl.innerHTML = "";
             for (const prjItem of this.assignedProjects) {
-                new ProjectItem(this.element.querySelector("ul").id, prjItem);
+                new App.ProjectItem(this.element.querySelector("ul").id, prjItem);
             }
         }
     }
     __decorate([
-        autobind
+        App.autobind
     ], ProjectList.prototype, "dragOverHandler", null);
     __decorate([
-        autobind
+        App.autobind
     ], ProjectList.prototype, "dropHandler", null);
     __decorate([
-        autobind
+        App.autobind
     ], ProjectList.prototype, "dragLeaveHandler", null);
-    class ProjectInput extends Component {
+    App.ProjectList = ProjectList;
+})(App || (App = {}));
+var App;
+(function (App) {
+    class ProjectInput extends App.Component {
         constructor() {
             super("project-input", "app", true, "user-input");
             this.titleInputElement = this.element.querySelector("#title");
@@ -241,9 +265,9 @@ var App;
                 min: 1,
                 max: 5,
             };
-            if (!validates(titleValidatable) ||
-                !validates(descriptionValidatable) ||
-                !validates(peopleValidatable)) {
+            if (!App.validates(titleValidatable) ||
+                !App.validates(descriptionValidatable) ||
+                !App.validates(peopleValidatable)) {
                 alert("Enter valid value, try again");
                 return;
             }
@@ -261,18 +285,353 @@ var App;
             const userInput = this.gatherUserInput();
             if (Array.isArray(userInput)) {
                 const [tit, des, pep] = userInput;
-                projState.addProject(tit, des, pep);
+                App.projState.addProject(tit, des, pep);
                 this.clearsInput();
             }
         }
     }
     __decorate([
-        autobind
+        App.autobind
     ], ProjectInput.prototype, "submitHandler", null);
-    new ProjectInput();
-    new ProjectList("active");
-    new ProjectList("finished");
+    App.ProjectInput = ProjectInput;
 })(App || (App = {}));
+var App;
+(function (App) {
+    new App.ProjectInput();
+    new App.ProjectList("active");
+    new App.ProjectList("finished");
+})(App || (App = {}));
+var _a;
+const e1 = {
+    name: "Max",
+    privileges: ["create server"],
+    startDate: new Date(),
+};
+function add2(n1, n2) {
+    if (typeof n1 === "string" || typeof n2 === "string") {
+        return n1.toString() + n2.toString();
+    }
+    return n1 + n2;
+}
+console.log(add2(4, 5));
+const res = add2("Oleh", "Syrovatko");
+console.log(res.split(" "));
+function printEmployeeInfo(emp) {
+    console.log("name: " + emp.name);
+    if ("privileges" in emp) {
+        console.log("privileges: " + emp.privileges);
+    }
+    if ("startDate" in emp) {
+        console.log("startDate: " + emp.startDate);
+    }
+}
+class Car {
+    drive() {
+        console.log("dryving...");
+    }
+}
+class Truck {
+    drive() {
+        console.log("dryving a truck...");
+    }
+    loadCargo(amount) {
+        console.log("with weight: " + amount);
+    }
+}
+const v1 = new Car();
+const v2 = new Truck();
+function useVehicle(vehicle) {
+    vehicle.drive();
+    if (vehicle instanceof Truck) {
+        vehicle.loadCargo(1000);
+    }
+}
+printEmployeeInfo(e1);
+printEmployeeInfo({ name: "Oleh", startDate: new Date() });
+useVehicle(v1);
+useVehicle(v2);
+function moveAnimal(animal) {
+    let speed;
+    switch (animal.type) {
+        case "bird":
+            speed = animal.flyingSpeed;
+            console.log(animal.type + " speed: " + speed);
+            break;
+        case "horse":
+            speed = animal.runningSpeed;
+            console.log(animal.type + " speed: " + speed);
+    }
+}
+moveAnimal({ type: "bird", flyingSpeed: 10 });
+moveAnimal({ type: "horse", runningSpeed: 7 });
+const inputEl = document.getElementById("some-id");
+if (inputEl) {
+    inputEl.value = "...";
+}
+const ErrorBag = {
+    email: "not valid email",
+    username: "must  start with a capital character",
+};
+const fetchedUserData = {
+    id: "2",
+    name: "oleh",
+    job: { title: "ceo", description: "aboute ceo" },
+};
+console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
+const UserInput = undefined;
+const storedData = UserInput !== null && UserInput !== void 0 ? UserInput : "default";
+console.log(storedData);
+function addNumbers(num1, num2, showResult, resultPhrase) {
+    const result = num1 + num2;
+    if (showResult) {
+        console.log(resultPhrase + result);
+    }
+    return result;
+}
+let n1;
+n1 = 5;
+const n2 = 5.5;
+let resultPhrase = "Result is: ";
+const printRes = true;
+addNumbers(n1, n2, printRes, resultPhrase);
+class Department {
+    static createEmployee(name) {
+        return { name };
+    }
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+        this.emploees = [];
+    }
+    addEmployee(emploee) {
+        this.emploees.push(emploee);
+    }
+    showEmployees() {
+        console.log(this.emploees.length);
+        console.log(this.emploees);
+    }
+}
+Department.fiscalYear = 2020;
+class ItDepartment extends Department {
+    constructor(id, admins) {
+        super(id, "IT");
+        this.admins = [];
+        this.admins = admins;
+    }
+    describe() {
+        console.log("It department: " + this.id);
+    }
+}
+class AccountDepartment extends Department {
+    get mostRecentReport() {
+        if (this.lastReport) {
+            return this.lastReport;
+        }
+        throw new Error("No lastReport found");
+    }
+    set mostRecentReport(value) {
+        if (!value) {
+            throw new Error("Please pass a valid value");
+        }
+        this.addReport(value);
+    }
+    constructor(id, reports) {
+        super(id, "Account");
+        this.reports = reports;
+        this.reports = reports;
+        this.lastReport = reports[0];
+    }
+    static getInstance() {
+        if (AccountDepartment.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountDepartment("d2", []);
+        return this.instance;
+    }
+    describe() {
+        console.log("Account department: " + this.id);
+    }
+    addEmployee(emploee) {
+        if (emploee === "Max") {
+            return;
+        }
+        this.emploees.push(emploee);
+    }
+    addReport(report) {
+        this.reports.push(report);
+        this.lastReport = report;
+    }
+    printReports() {
+        console.log(this.reports);
+    }
+}
+console.log(Department.createEmployee("test new Employee"));
+console.log("static property: " + Department.fiscalYear);
+const ItDep = new ItDepartment("d1", ["John"]);
+ItDep.describe();
+ItDep.addEmployee("John");
+ItDep.addEmployee("Max");
+ItDep.showEmployees();
+console.log(ItDep);
+const AcDep = AccountDepartment.getInstance();
+console.log(AcDep);
+AcDep.describe();
+AcDep.mostRecentReport = "test setter Report";
+AcDep.addReport("custom report");
+console.log(AcDep.mostRecentReport);
+AcDep.printReports();
+AcDep.addEmployee("Max");
+AcDep.addEmployee("Nick");
+AcDep.showEmployees();
+var Role;
+(function (Role) {
+    Role["ADMIN"] = "admin";
+    Role[Role["READ_ONLY"] = 5] = "READ_ONLY";
+    Role[Role["AUTHOR"] = 200] = "AUTHOR";
+})(Role || (Role = {}));
+;
+const person = {
+    name: "Oleh",
+    age: 40,
+    hobbies: ['sports', 'books'],
+    role: Role.ADMIN
+};
+let favoriteActivities;
+favoriteActivities = ["Sport", 5, true];
+console.log(person.name);
+console.log(person.role);
+console.log(favoriteActivities[2]);
+function add(n1, n2) {
+    return n1 + n2;
+}
+function printResult(num) {
+    console.log('Result' + num);
+}
+function addAndHandle(n1, n2, cb) {
+    const result = n1 + n2;
+    cb(result);
+}
+printResult(add(5, 12));
+let combineValues;
+combineValues = add;
+console.log(combineValues(8, 8));
+addAndHandle(10, 20, (result) => { console.log(result); return result; });
+function merge(objA, objB) {
+    return Object.assign(objA, objB);
+}
+const mergedObj = merge({ name: "Oleh", hobbies: ["sports"] }, { age: 30 });
+console.log(mergedObj);
+function countAndDescribe(element) {
+    let descriptText = "empty";
+    if (element.length === 1) {
+        descriptText = "Got 1 element";
+    }
+    if (element.length > 1) {
+        descriptText = "Got " + element.length + " elements";
+    }
+    return [element, descriptText];
+}
+console.log(countAndDescribe(""));
+console.log(countAndDescribe("h"));
+console.log(countAndDescribe("high there"));
+console.log(countAndDescribe([]));
+console.log(countAndDescribe(["sport", "cooking"]));
+function keyInObject(obj, key) {
+    return "value " + obj[key];
+}
+console.log(keyInObject({ name: "Oleh" }, "name"));
+class DataStorage {
+    constructor() {
+        this.data = [];
+    }
+    addItem(item) {
+        this.data.push(item);
+    }
+    removeItem(item) {
+        if (this.data.indexOf(item) === -1) {
+            return;
+        }
+        this.data.splice(this.data.indexOf(item), 1);
+    }
+    getItems() {
+        return [...this.data];
+    }
+}
+const dataStorage = new DataStorage();
+dataStorage.addItem("Oleh");
+dataStorage.addItem("John");
+dataStorage.addItem("Max");
+console.log(dataStorage.getItems());
+dataStorage.removeItem("Max");
+console.log(dataStorage.getItems());
+const numStorage = new DataStorage();
+const objStorage = new DataStorage();
+objStorage.addItem({ name: "Oleh" });
+objStorage.addItem({ name: "John" });
+const maxObj = { name: "Max" };
+objStorage.addItem(maxObj);
+console.log(objStorage.getItems());
+objStorage.removeItem(maxObj);
+console.log(objStorage.getItems());
+function createCourseGoal(title, desciption, date) {
+    let courseGoal = {};
+    courseGoal.title = title;
+    courseGoal.description = desciption;
+    courseGoal.completeUntil = date;
+    return courseGoal;
+}
+const names = ["Oleh", "John"];
+const pageAnnotation = {
+    annotation: "Small page",
+    numberPage: 1,
+};
+let usr1;
+usr1 = {
+    nameP: "Oleh",
+    age: 40,
+    greet(phrase) {
+        console.log(phrase + " " + this.nameP);
+    },
+};
+usr1.greet("Hi, I am");
+class Person {
+    constructor(n) {
+        this.age = 30;
+        if (n) {
+            this.name = n;
+        }
+    }
+    greet(phrase) {
+        if (this.name) {
+            console.log(phrase + " " + this.name);
+        }
+        console.log("Hi");
+    }
+}
+let plus;
+plus = (n1, n2) => {
+    return n1 + n2;
+};
+let usr2;
+usr2 = new Person();
+let usr3;
+usr3 = new Person("Mike");
+usr3.greet("Hi, I am");
+console.log(usr3);
+console.log(plus(2, 2));
+let userInput;
+let userName;
+userInput = 5;
+userInput = "Oleh";
+if (typeof userInput === "string") {
+    userName = userInput;
+}
+const button = document.querySelector('#buttonId');
+if (button) {
+    button.addEventListener('click', () => {
+        console.log('Click');
+    });
+}
 function combine(num1, num2, resultConversation) {
     if (typeof num1 === "number" && typeof num2 === "number" || resultConversation === "asNumber") {
         return +num1 + +num2;
