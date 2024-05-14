@@ -25,6 +25,22 @@ var App;
 })(App || (App = {}));
 var App;
 (function (App) {
+    function autobind(_, _2, descriptor) {
+        const originalMethod = descriptor.value;
+        const adjDescriptor = {
+            configurable: true,
+            enumerable: false,
+            get() {
+                const boundFn = originalMethod.bind(this);
+                return boundFn;
+            },
+        };
+        return adjDescriptor;
+    }
+    App.autobind = autobind;
+})(App || (App = {}));
+var App;
+(function (App) {
     class State {
         constructor() {
             this.listeners = [];
@@ -68,49 +84,6 @@ var App;
 })(App || (App = {}));
 var App;
 (function (App) {
-    function validates(validateInput) {
-        let isValid = true;
-        if (validateInput.required) {
-            isValid = isValid && validateInput.value.toString().trim().length !== 0;
-        }
-        if (validateInput.minLength != null &&
-            typeof validateInput.value === "string") {
-            isValid =
-                isValid && validateInput.value.trim().length >= validateInput.minLength;
-        }
-        if (validateInput.maxLength != null &&
-            typeof validateInput.value === "string") {
-            isValid =
-                isValid && validateInput.value.trim().length <= validateInput.maxLength;
-        }
-        if (validateInput.min != null && typeof validateInput.value === "number") {
-            isValid = isValid && validateInput.value >= validateInput.min;
-        }
-        if (validateInput.max != null && typeof validateInput.value === "number") {
-            isValid = isValid && validateInput.value <= validateInput.max;
-        }
-        return isValid;
-    }
-    App.validates = validates;
-})(App || (App = {}));
-var App;
-(function (App) {
-    function autobind(_, _2, descriptor) {
-        const originalMethod = descriptor.value;
-        const adjDescriptor = {
-            configurable: true,
-            enumerable: false,
-            get() {
-                const boundFn = originalMethod.bind(this);
-                return boundFn;
-            },
-        };
-        return adjDescriptor;
-    }
-    App.autobind = autobind;
-})(App || (App = {}));
-var App;
-(function (App) {
     class Component {
         constructor(templateId, hostElementId, insertedAtStart, newElementId) {
             this.templateElement = document.getElementById(templateId);
@@ -126,45 +99,6 @@ var App;
         }
     }
     App.Component = Component;
-})(App || (App = {}));
-var App;
-(function (App) {
-    class ProjectItem extends App.Component {
-        constructor(hostId, project) {
-            super("single-project", hostId, false, project.id);
-            this.project = project;
-            this.configure();
-            this.renderContent();
-        }
-        get persons() {
-            if (this.project.people === 1) {
-                return "1 person";
-            }
-            return `${this.project.people} persons `;
-        }
-        dragStartHandler(event) {
-            event.dataTransfer.setData("text/plain", this.project.id);
-            event.dataTransfer.effectAllowed = "move";
-        }
-        dragEndHandler(_) { }
-        configure() {
-            this.element.addEventListener("dragstart", this.dragStartHandler);
-            this.element.addEventListener("dragend", this.dragEndHandler);
-        }
-        renderContent() {
-            this.element.querySelector("h2").textContent = this.project.title;
-            this.element.querySelector("h3").textContent =
-                this.persons + " assigned";
-            this.element.querySelector("p").textContent = this.project.description;
-        }
-    }
-    __decorate([
-        App.autobind
-    ], ProjectItem.prototype, "dragStartHandler", null);
-    __decorate([
-        App.autobind
-    ], ProjectItem.prototype, "dragEndHandler", null);
-    App.ProjectItem = ProjectItem;
 })(App || (App = {}));
 var App;
 (function (App) {
@@ -234,6 +168,33 @@ var App;
 })(App || (App = {}));
 var App;
 (function (App) {
+    function validates(validateInput) {
+        let isValid = true;
+        if (validateInput.required) {
+            isValid = isValid && validateInput.value.toString().trim().length !== 0;
+        }
+        if (validateInput.minLength != null &&
+            typeof validateInput.value === "string") {
+            isValid =
+                isValid && validateInput.value.trim().length >= validateInput.minLength;
+        }
+        if (validateInput.maxLength != null &&
+            typeof validateInput.value === "string") {
+            isValid =
+                isValid && validateInput.value.trim().length <= validateInput.maxLength;
+        }
+        if (validateInput.min != null && typeof validateInput.value === "number") {
+            isValid = isValid && validateInput.value >= validateInput.min;
+        }
+        if (validateInput.max != null && typeof validateInput.value === "number") {
+            isValid = isValid && validateInput.value <= validateInput.max;
+        }
+        return isValid;
+    }
+    App.validates = validates;
+})(App || (App = {}));
+var App;
+(function (App) {
     class ProjectInput extends App.Component {
         constructor() {
             super("project-input", "app", true, "user-input");
@@ -300,6 +261,45 @@ var App;
     new App.ProjectInput();
     new App.ProjectList("active");
     new App.ProjectList("finished");
+})(App || (App = {}));
+var App;
+(function (App) {
+    class ProjectItem extends App.Component {
+        constructor(hostId, project) {
+            super("single-project", hostId, false, project.id);
+            this.project = project;
+            this.configure();
+            this.renderContent();
+        }
+        get persons() {
+            if (this.project.people === 1) {
+                return "1 person";
+            }
+            return `${this.project.people} persons `;
+        }
+        dragStartHandler(event) {
+            event.dataTransfer.setData("text/plain", this.project.id);
+            event.dataTransfer.effectAllowed = "move";
+        }
+        dragEndHandler(_) { }
+        configure() {
+            this.element.addEventListener("dragstart", this.dragStartHandler);
+            this.element.addEventListener("dragend", this.dragEndHandler);
+        }
+        renderContent() {
+            this.element.querySelector("h2").textContent = this.project.title;
+            this.element.querySelector("h3").textContent =
+                this.persons + " assigned";
+            this.element.querySelector("p").textContent = this.project.description;
+        }
+    }
+    __decorate([
+        App.autobind
+    ], ProjectItem.prototype, "dragStartHandler", null);
+    __decorate([
+        App.autobind
+    ], ProjectItem.prototype, "dragEndHandler", null);
+    App.ProjectItem = ProjectItem;
 })(App || (App = {}));
 var _a;
 const e1 = {

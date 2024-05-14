@@ -1,3 +1,8 @@
+/// <reference path = "../util/validation.ts" />
+/// <reference path = "../decorators/autobind-decorator.ts" />
+/// <reference path = "../components/base-components.ts" />
+/// <reference path = "../state/project.ts" />
+
 namespace App {
   export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     titleInputElement: HTMLInputElement;

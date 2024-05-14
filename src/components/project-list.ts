@@ -1,3 +1,9 @@
+/// <reference path = "../models/drag-drop-interfaces.ts" />
+/// <reference path = "../models/project.ts" />
+/// <reference path = "../decorators/autobind-decorator.ts" />
+/// <reference path = "../state/project.ts" />
+/// <reference path = "../components/base-components.ts" />
+
 namespace App {
   export class ProjectList
     extends Component<HTMLDivElement, HTMLElement>
