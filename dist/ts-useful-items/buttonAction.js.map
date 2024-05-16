@@ -1,0 +1,1 @@
+{"version":3,"file":"buttonAction.js","sourceRoot":"","sources":["../../src/ts-useful-items/buttonAction.ts"],"names":[],"mappings":";AAAA,MAAM,MAAM,GAAG,QAAQ,CAAC,aAAa,CAAC,WAAW,CAAE,CAAC;AAEpD,IAAI,MAAM,EAAE,CAAC;IACX,MAAM,CAAC,gBAAgB,CAAC,OAAO,EAAE,GAAG,EAAE;QACpC,OAAO,CAAC,GAAG,CAAC,OAAO,CAAC,CAAC;IACvB,CAAC,CAAC,CAAC;AACL,CAAC"}
