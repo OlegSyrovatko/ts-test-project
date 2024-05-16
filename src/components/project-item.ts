@@ -6,7 +6,7 @@
 import { Draggable } from "../models/drag-drop-interfaces.js";
 import { Project } from "../models/project.js";
 import { autobind } from "../decorators/autobind-decorator.js";
-import { Component } from "../components/base-components.js";
+import Component from "../components/base-components.js";
 
 // namespace App {
 export class ProjectItem

@@ -4,9 +4,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { validates } from "../util/validation.js";
+import * as Validation from "../util/validation.js";
 import { autobind } from "../decorators/autobind-decorator.js";
-import { Component } from "../components/base-components.js";
+import Component from "../components/base-components.js";
 import { projState } from "../state/project.js";
 export class ProjectInput extends Component {
     constructor() {
@@ -39,9 +39,9 @@ export class ProjectInput extends Component {
             min: 1,
             max: 5,
         };
-        if (!validates(titleValidatable) ||
-            !validates(descriptionValidatable) ||
-            !validates(peopleValidatable)) {
+        if (!Validation.validates(titleValidatable) ||
+            !Validation.validates(descriptionValidatable) ||
+            !Validation.validates(peopleValidatable)) {
             alert("Enter valid value, try again");
             return;
         }

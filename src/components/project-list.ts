@@ -8,7 +8,7 @@ import { DragTarget } from "../models/drag-drop-interfaces.js";
 import { Project, ProjectStatus } from "../models/project.js";
 import { autobind } from "../decorators/autobind-decorator.js";
 import { projState } from "../state/project.js";
-import { Component } from "../components/base-components.js";
+import Component from "../components/base-components.js";
 import { ProjectItem } from "../components/project-item.js";
 
 // namespace App {
