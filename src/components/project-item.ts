@@ -3,10 +3,10 @@
 // /// <reference path = "../decorators/autobind-decorator.ts" />
 // /// <reference path = "../components/base-components.ts" />
 
-import { Draggable } from "../models/drag-drop-interfaces.js";
-import { Project } from "../models/project.js";
-import { autobind } from "../decorators/autobind-decorator.js";
-import Component from "../components/base-components.js";
+import { Draggable } from "../models/drag-drop-interfaces";
+import { Project } from "../models/project";
+import { autobind } from "../decorators/autobind-decorator";
+import Component from "../components/base-components";
 
 // namespace App {
 export class ProjectItem

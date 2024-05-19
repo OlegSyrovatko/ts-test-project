@@ -4,12 +4,12 @@
 // /// <reference path = "../state/project.ts" />
 // /// <reference path = "../components/base-components.ts" />
 
-import { DragTarget } from "../models/drag-drop-interfaces.js";
-import { Project, ProjectStatus } from "../models/project.js";
-import { autobind } from "../decorators/autobind-decorator.js";
-import { projState } from "../state/project.js";
-import Component from "../components/base-components.js";
-import { ProjectItem } from "../components/project-item.js";
+import { DragTarget } from "../models/drag-drop-interfaces";
+import { Project, ProjectStatus } from "../models/project";
+import { autobind } from "../decorators/autobind-decorator";
+import { projState } from "../state/project";
+import Component from "../components/base-components";
+import { ProjectItem } from "../components/project-item";
 
 // namespace App {
 export class ProjectList
