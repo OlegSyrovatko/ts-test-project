@@ -1,20 +1,23 @@
-// /// <reference path = "./components/project-list.ts" />
-// /// <reference path = "./components/project-input.ts" />
-
-// import { ProjectList } from "./components/project-list.js";
-// import { ProjectInput } from "./components/project-input.js";
-
-import { ProjectList } from "./components/project-list";
-import { ProjectInput } from "./components/project-input";
-
-// namespace App {
-new ProjectInput();
-new ProjectList("active");
-new ProjectList("finished");
-// }
-
 import _ from "lodash";
+
 console.log(_.shuffle([1, 2, 3]));
 
 declare var Global: any;
 console.log(Global);
+
+import "reflect-metadata";
+import { plainToClass } from "class-transformer";
+import { Product } from "./models/product";
+
+const products = [
+  { title: "carpet", price: 10.99 },
+  { title: "book2", price: 11.99 },
+];
+
+const loadedProsucts = plainToClass(Product, products);
+// const loadedProsucts = products.map((prod) => {
+//   return new Product(prod.title, prod.price);
+// });
+for (const prod of loadedProsucts) {
+  console.log(prod.getProduct());
+}
