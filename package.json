@@ -6,13 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack --config webpack.config.prod.js"
   },
   "author": "= <=>",
   "license": "ISC",
   "devDependencies": {
-    "@types/lodash": "^4.17.4",
     "clean-webpack-plugin": "^4.0.0",
+    "lite-server": "^2.6.1",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
