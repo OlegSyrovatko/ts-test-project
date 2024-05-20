@@ -12,9 +12,3 @@ new ProjectInput();
 new ProjectList("active");
 new ProjectList("finished");
 // }
-
-import _ from "lodash";
-console.log(_.shuffle([1, 2, 3]));
-
-declare var Global: any;
-console.log(Global);

@@ -20,6 +20,8 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "@types/lodash": "^4.17.4"
+    "@types/lodash": "^4.17.4",
+    "class-transformer": "^0.5.1",
+    "reflect-metadata": "^0.2.2"
   }
 }
