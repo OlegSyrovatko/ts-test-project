@@ -1,15 +1,67 @@
-.projects li{
-    box-shadow: 1px 1px 8px rbga(0,0,0,0.26) ;
-    padding: 1rem;
-    margin: 1rem;
+form,
+#active-projects,
+#finished-projects {
+  margin: 20px auto 10px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  border-radius: 4px;
+  border: #000000 solid 1px;
+  max-width: 320px;
+  padding: 20px 30px 20px 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 
-.projects li h2 {
-color: red;
-margin: 0.5rem 0;
+h2,
+h3,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
 }
 
-.droppable{
-    border: 1px solid;
-    background: grey;
+input,
+textarea,
+button {
+  width: 100%;
+}
+
+button {
+  color: #ccc;
+  background-color: black;
+  color: #ccc;
+  height: 30px;
+  transition: color 0.3s ease;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: rgb(0, 255, 0);
+  color: rgb(0, 0, 0);
+  text-decoration: underline;
+  box-shadow: 3px 2px 6px 1px rgba(0, 0, 0, 0.53);
+}
+
+ul {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  list-style: none;
+}
+
+li {
+  box-shadow: 1px 1px 8px rbga(0, 0, 0, 0.26);
+  padding: 10px;
+  border-radius: 4px;
+  color: #fff;
+}
+#active-projects li {
+  border: #b40505 solid 1px;
+  background-color: #701111;
+}
+#finished-projects li {
+  border: #050bb4 solid 1px;
+  background-color: #271170;
 }
